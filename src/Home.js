@@ -4,9 +4,9 @@ import Tracker from "./Tracker";
 const Home = () => {
   return (
     <div>
-      <Tracker type="express" />
+      <Tracker type="feed" />
       <Tracker type="sleep" />
-      <Tracker type="food-drink" />
+      <Tracker type="food" />
       <Tracker type="cry" />
     </div>
   );
