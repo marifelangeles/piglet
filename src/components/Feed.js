@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { updateFeed } from "../actions/feed-actions";
+import { updateFeedTime } from "../actions/update-feed-time";
+import { updateFeedAmount } from "../actions/update-feed-amount";
+
 import moment from "moment";
 import { navigate } from "@reach/router";
 
@@ -12,8 +14,8 @@ const Feed = (props) => {
   const [feedAmount, setfeedAmount] = useState("2oz");
 
   const handleSubmit = () => {
-    console.log("ok hitttt");
-    props.updateFeed(feedTime, feedAmount);
+    props.dispatch(updateFeedTime(feedTime));
+    props.dispatch(updateFeedAmount(feedAmount));
     navigate("./");
   };
 
@@ -49,12 +51,13 @@ const mapStateToProps = ({ feedTime, feedAmount }) => ({
   },
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators(
-    {
-      updateFeed,
-    },
-    dispatch
-  );
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators(
+//     {
+//       updateFeedTime,
+//       updateFeedAmount,
+//     },
+//     dispatch
+//   );
+// };
+export default connect(mapStateToProps)(Feed);
