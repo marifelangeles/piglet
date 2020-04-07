@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-// import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 
-import { updateFeedTime } from "../actions/update-feed-time";
-import { updateFeedAmount } from "../actions/update-feed-amount";
+import { updateFeedTime, updateFeedAmount } from "../actions/update-feed";
 
 import moment from "moment";
 import { navigate } from "@reach/router";
@@ -45,19 +43,8 @@ const Feed = (props) => {
 };
 
 const mapStateToProps = ({ feedTime, feedAmount }) => ({
-  payload: {
-    feedTime,
-    feedAmount,
-  },
+  feedTime,
+  feedAmount,
 });
 
-// const mapDispatchToProps = (dispatch) => {
-//   return bindActionCreators(
-//     {
-//       updateFeedTime,
-//       updateFeedAmount,
-//     },
-//     dispatch
-//   );
-// };
 export default connect(mapStateToProps)(Feed);
