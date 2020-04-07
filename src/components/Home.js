@@ -6,9 +6,9 @@ const Home = () => {
   return (
     <div>
       <Tracker type="feed" />
-      <Tracker type="sleep" />
+      {/* <Tracker type="sleep" />
       <Tracker type="food" />
-      <Tracker type="cry" />
+      <Tracker type="cry" /> */}
     </div>
   );
 };
