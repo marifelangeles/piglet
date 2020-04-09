@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { updateFeedTime, updateFeedAmount } from "../actions/update-feed";
+import { updateFeedTimeStart, updateFeedAmount } from "../actions/update-feed";
 
 import moment from "moment";
 import { navigate } from "@reach/router";
@@ -9,20 +9,19 @@ import { navigate } from "@reach/router";
 const Feed = () => {
   const dispatch = useDispatch();
 
-  const [feedTime] = useState(moment().format());
+  const [feedTimeStart] = useState(new Date());
   const [feedAmount, setfeedAmount] = useState("2oz");
 
   const handleSubmit = () => {
-    dispatch(updateFeedTime(feedTime));
+    dispatch(updateFeedTimeStart(feedTimeStart));
+    console.log("dispatching feedTimeStart", feedTimeStart);
     dispatch(updateFeedAmount(feedAmount));
     navigate("./");
   };
 
-  console.log("feedTime IN FEED", feedTime);
-
   return (
     <div>
-      <h1>{moment(feedTime).format("LT")}</h1>
+      <h1>{moment(feedTimeStart).format("LT")}</h1>
       <div>
         <label>
           Amount
@@ -45,10 +44,4 @@ const Feed = () => {
   );
 };
 
-// const mapStateToProps = ({ feedTime, feedAmount }) => ({
-//   feedTime,
-//   feedAmount,
-// });
-
-// export default connect(mapStateToProps)(Feed);
 export default Feed;

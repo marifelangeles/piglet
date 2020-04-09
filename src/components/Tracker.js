@@ -1,44 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 import { navigate } from "@reach/router";
+
+import { updateCurrentTime } from "../actions/update-feed";
+
 import moment from "moment";
 
 const Tracker = ({ type }) => {
-  const timeString = useSelector((state) => state.feedReducer.feedTime);
-  const timeStart = moment(timeString);
-  const currentTime = moment().format();
-  const relativeTime = timeStart.from(currentTime);
+  const dispatch = useDispatch();
 
+  const feedTimeStart = useSelector((state) => state.feedReducer.feedTimeStart);
+  const [currentTime, setCurrentTime] = useState(new Date());
+  // const [relativeTime, setRelativeTime] = useState(currentTime);
   const feedAmountTracker = useSelector(
     (state) => state.feedReducer.feedAmount
   );
-
-  // const clock = () => {
-  //   let d = new Date();
-  //   let t = d.toLocaleTimeString();
-  //   return t;
-  // };
-
-  // const timer = setInterval(clock, 1000);
-
-  // const stopClock = () => {
-  //   console.log("stop hit");
-  //   clearInterval(timer);
-  // };
-
-  // const interval = setInterval(() => {
-  //   let d = new Date();
-  //   let t = d.toLocaleTimeString();
-  //   console.log("t", t);
-  // }, 1000);
-  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     let timerID = setInterval(() => tick(), 1000);
     return () => clearInterval(timerID);
   });
-  const tick = () => setDate(new Date());
+
+  const tick = () => {
+    setCurrentTime(new Date());
+    console.log("feedTimeStart", feedTimeStart);
+    console.log("currentTime", currentTime);
+    dispatch(updateCurrentTime(currentTime));
+  };
+
+  // useEffect(() => {
+  //   dispatch(updateCurrentTime(currentTime));
+  // });
+
+  const getRelativeTime = () => {
+    let relativeTime = moment(feedTimeStart).from(currentTime);
+    return relativeTime;
+  };
 
   return (
     <div
@@ -47,9 +44,10 @@ const Tracker = ({ type }) => {
         navigate(`./${type}`);
       }}
     >
-      <h1>{date.toLocaleTimeString()}</h1>
-      {/* <button onClick={() => stopClock()}>Stop</button> */}
-      <h1>Fed {relativeTime}</h1>
+      <h1>START: {moment(feedTimeStart).format("h:mm:ss a")}</h1>
+      <h1>CURRENT: {moment(currentTime).format("h:mm:ss a")}</h1>
+      {/* <h1>RELATIVE: {moment(relativeTime).format("h:mm:ss a")}</h1> */}
+      <h1>RELATIVE: {getRelativeTime()}</h1>
       <h2>{feedAmountTracker}</h2>
     </div>
   );
