@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { updateFeedTimeStart, updateFeedAmount } from "../actions/update-feed";
+import {
+  updateFeedTimeStart,
+  updateFeedAmount,
+  addFeed,
+} from "../actions/update-feed";
 
 import moment from "moment";
 import { navigate } from "@reach/router";
@@ -10,12 +14,13 @@ const Feed = () => {
   const dispatch = useDispatch();
 
   const [feedTimeStart] = useState(new Date());
-  const [feedAmount, setfeedAmount] = useState("2oz");
+  const [feedAmount, setfeedAmount] = useState(2);
 
   const handleSubmit = () => {
     dispatch(updateFeedTimeStart(feedTimeStart));
-    console.log("dispatching feedTimeStart", feedTimeStart);
     dispatch(updateFeedAmount(feedAmount));
+    console.log("oz selected ", feedAmount);
+    dispatch(addFeed(feedAmount));
     navigate("./");
   };
 
@@ -27,13 +32,13 @@ const Feed = () => {
           Amount
           <select
             value={feedAmount}
-            onChange={(e) => setfeedAmount(e.target.value)}
+            onChange={(e) => setfeedAmount(+e.target.value)}
           >
-            <option value="1oz">1oz</option>
-            <option value="1.5oz">1.5oz</option>
-            <option value="2oz">2oz</option>
-            <option value="2.5oz">2.5oz</option>
-            <option value="3oz">3oz</option>
+            <option value={1}>1oz</option>
+            <option value={1.5}>1.5oz</option>
+            <option value={2}>2oz</option>
+            <option value={2.5}>2.5oz</option>
+            <option value={3}>3oz</option>
           </select>
         </label>
       </div>
