@@ -1,5 +1,5 @@
 export default {
-  feedTimeStart: "",
+  feedTimeStart: null,
   feedAmount: 0,
   currentTime: "",
   totalFeed: [],
