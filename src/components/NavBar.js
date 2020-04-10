@@ -7,7 +7,7 @@ import { css, jsx } from "@emotion/core";
 const NavBar = () => (
   <header
     css={css`
-      background-color: #c4deee;
+      background-color: #78aac3;
       position: sticky;
       top: 0;
       padding: 1em;
