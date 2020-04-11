@@ -1,14 +1,15 @@
 import React from "react";
 
 import Tracker from "./Tracker";
+import colors from "./colors";
 
 const Home = () => {
   return (
     <div>
-      <Tracker type="feed" bgColor="#eeab73" />
-      <Tracker type="feed" bgColor="#97c8d6" />
-      <Tracker type="feed" bgColor="#f3cd86" />
-      <Tracker type="feed" bgColor="#c4deee" />
+      <Tracker type="feed" bgColor={colors.yellow} />
+      <Tracker type="feed" bgColor={colors.blue} />
+      <Tracker type="feed" bgColor={colors.rose} />
+      <Tracker type="feed" bgColor={colors.green} />
     </div>
   );
 };

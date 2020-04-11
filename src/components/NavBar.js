@@ -3,18 +3,20 @@
 
 import { Link } from "@reach/router";
 import { css, jsx } from "@emotion/core";
+import colors from "./colors";
 
 const NavBar = () => (
   <header
     css={css`
-      background-color: #78aac3;
+      background-color: ${colors.bisque};
       position: sticky;
       top: 0;
       padding: 1em;
       margin: 0;
       a {
         text-decoration: none;
-        color: #123244;
+        color: ${colors.dark};
+        font-weight: 900;
       }
       span {
         padding-right: 5px;

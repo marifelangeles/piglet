@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { navigate } from "@reach/router";
+
+import moment from "moment";
 
 import {
   updateFeedTimeStart,
   updateFeedAmount,
   addFeed,
 } from "../actions/update-feed";
-
-import moment from "moment";
-import { navigate } from "@reach/router";
 
 const Feed = () => {
   const dispatch = useDispatch();
