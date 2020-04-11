@@ -6,29 +6,25 @@ import { navigate } from "@reach/router";
 import { css, jsx } from "@emotion/core";
 import moment from "moment";
 
-import { updateCurrentTime } from "../actions/update-feed";
+import RelativeTime from "./RelativeTime";
 
 const Tracker = ({ type, bgColor }) => {
-  const dispatch = useDispatch();
-
   const feedTimeStart = useSelector((state) => state.feedReducer.feedTimeStart);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const sleepTimeStart = useSelector(
+    (state) => state.sleepReducer.sleepTimeStart
+  );
   const feedAmount = useSelector((state) => state.feedReducer.feedAmount);
   const totalFeed = useSelector((state) => state.feedReducer.totalFeed);
 
-  useEffect(() => {
-    let timerID = setInterval(() => tick(), 10000);
-    return () => clearInterval(timerID);
-  });
-
-  const tick = () => {
-    setCurrentTime(new Date());
-    dispatch(updateCurrentTime(currentTime));
-  };
-
-  const getRelativeTime = () => {
-    let relativeTime = moment(feedTimeStart).from(currentTime);
-    return relativeTime;
+  const getTimeType = () => {
+    switch (type) {
+      case "feed":
+        return feedTimeStart;
+      case "sleep":
+        return sleepTimeStart;
+      default:
+        return null;
+    }
   };
 
   const getTotalFeed = () => {
@@ -36,6 +32,16 @@ const Tracker = ({ type, bgColor }) => {
     return total;
   };
 
+  const status = () => {
+    switch (type) {
+      case "feed":
+        return <h2>Expressed {feedAmount} oz</h2>;
+      case "sleep":
+        return <h2>Slept</h2>;
+      default:
+        return "";
+    }
+  };
   return (
     <div
       className={type}
@@ -60,8 +66,9 @@ const Tracker = ({ type, bgColor }) => {
     >
       {/* <h1>START: {moment(feedTimeStart).format("h:mm:ss a")}</h1> */}
       {/* <h1>CURRENT: {moment(currentTime).format("h:mm:ss a")}</h1> */}
-      <h1>{feedTimeStart ? getRelativeTime() : null}</h1>
-      <h2>Expressed {feedAmount} oz</h2>
+      <RelativeTime timeStart={getTimeType()} />
+      {status()}
+      {/* <h2>Expressed {feedAmount} oz</h2> */}
       <p>Total {getTotalFeed()} oz</p>
     </div>
   );

@@ -7,9 +7,9 @@ const Home = () => {
   return (
     <div>
       <Tracker type="feed" bgColor={colors.yellow} />
-      <Tracker type="feed" bgColor={colors.blue} />
-      <Tracker type="feed" bgColor={colors.rose} />
-      <Tracker type="feed" bgColor={colors.green} />
+      <Tracker type="sleep" bgColor={colors.blue} />
+      <Tracker type="diaper" bgColor={colors.rose} />
+      <Tracker type="pump" bgColor={colors.green} />
     </div>
   );
 };
