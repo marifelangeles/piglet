@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 
 import moment from "moment";
 
-import { updateCurrentTime } from "../actions/update-feed";
-
 const RelativeTime = ({ timeStart }) => {
   const dispatch = useDispatch();
 
@@ -18,7 +16,7 @@ const RelativeTime = ({ timeStart }) => {
 
   const tick = () => {
     setCurrentTime(new Date());
-    dispatch(updateCurrentTime(currentTime));
+    // dispatch(updateCurrentTime(currentTime));
   };
 
   const getRelativeTime = () => {
