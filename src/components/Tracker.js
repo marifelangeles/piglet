@@ -10,18 +10,26 @@ import RelativeTime from "./RelativeTime";
 
 const Tracker = ({ type, bgColor }) => {
   const feedTimeStart = useSelector((state) => state.feedReducer.feedTimeStart);
-  const sleepTimeStart = useSelector(
-    (state) => state.sleepReducer.sleepTimeStart
-  );
+  const sleepTimes = useSelector((state) => state.sleepReducer.sleep); // [ { start: ''}, { end: ''}]
   const feedAmount = useSelector((state) => state.feedReducer.feedAmount);
   const totalFeed = useSelector((state) => state.feedReducer.totalFeed);
+
+  const getLastSleepTime = () => {
+    // console.log("IN getLastSleepTime");
+    const lastSleepTime = sleepTimes.slice(-1);
+    const time = lastSleepTime && lastSleepTime[0];
+    const value = time && (time.start || time.end);
+    // console.log("time", time);
+    // console.log("value", value);
+    return value;
+  };
 
   const getTimeType = () => {
     switch (type) {
       case "feed":
         return feedTimeStart;
       case "sleep":
-        return sleepTimeStart;
+        return getLastSleepTime();
       default:
         return null;
     }
@@ -66,9 +74,8 @@ const Tracker = ({ type, bgColor }) => {
     >
       {/* <h1>START: {moment(feedTimeStart).format("h:mm:ss a")}</h1> */}
       {/* <h1>CURRENT: {moment(currentTime).format("h:mm:ss a")}</h1> */}
-      <RelativeTime timeStart={getTimeType()} />
+      <RelativeTime type={type} timeStart={getTimeType()} />
       {status()}
-      {/* <h2>Expressed {feedAmount} oz</h2> */}
       <p>Total {getTotalFeed()} oz</p>
     </div>
   );

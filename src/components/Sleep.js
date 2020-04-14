@@ -29,6 +29,11 @@ const Sleep = () => {
     navigate("./");
   };
 
+  // const sleepDuration = () => {
+  //   console.log("IN SLEEP DURATION");
+
+  // };
+
   return (
     <div>
       <h1>{moment(time).format("LT")}</h1>

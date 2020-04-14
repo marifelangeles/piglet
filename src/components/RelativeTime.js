@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 
 import moment from "moment";
 
-const RelativeTime = ({ timeStart }) => {
+const RelativeTime = ({ type, timeStart }) => {
   const dispatch = useDispatch();
-
+  //   console.log("type", type, "TIMESTART", timeStart);
   const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
@@ -16,7 +16,6 @@ const RelativeTime = ({ timeStart }) => {
 
   const tick = () => {
     setCurrentTime(new Date());
-    // dispatch(updateCurrentTime(currentTime));
   };
 
   const getRelativeTime = () => {
