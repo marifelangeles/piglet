@@ -51,28 +51,24 @@ const RelativeTime = ({
         return <h2>Expressed {feedAmount} oz</h2>;
       case "sleep":
         let isAsleep = sleep.isAsleep;
-        console.log("isAsleep", isAsleep);
-        if (isAsleep) {
-          return <h2>Sleeping {sleepingTime()}</h2>;
-        } else {
-          return <h2>Slept {sleepDuration()}</h2>;
+        console.log("sleep", sleep);
+        console.log("sleep length", sleep.sleep.length);
+        if (sleep.sleep.length === 0) {
+          return <h2>No sleep record</h2>;
+        } else if (sleep) {
+          if (sleep && isAsleep) {
+            return <h2>Sleeping {sleepingTime()}</h2>;
+          } else if (sleep && !isAsleep) {
+            return <h2>Slept {sleepDuration()}</h2>;
+          } else {
+            return null;
+          }
         }
-      default:
-        return "";
     }
   };
 
   return (
     <div>
-      {/* {type === "sleep" ? (
-        isAsleep ? (
-          <h1>Fell asleep {getRelativeTime()}</h1>
-        ) : (
-          <h1>Woke up {getRelativeTime()}</h1>
-        )
-      ) : (
-        <h1>{getRelativeTime()}</h1>
-      )} */}
       <h1>{getRelativeTime()}</h1>
       {status()}
     </div>
