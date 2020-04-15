@@ -16,10 +16,10 @@ const Tracker = ({ type, bgColor }) => {
 
   const getLastSleepTime = () => {
     // console.log("IN getLastSleepTime");
-    const lastSleepTime = sleepTimes.slice(-1);
-    const time = lastSleepTime && lastSleepTime[0];
-    const value = time && (time.start || time.end);
-    // console.log("time", time);
+    let lastSleepTime = sleepTimes.slice(-1);
+    let time = lastSleepTime && lastSleepTime[0];
+    let value = time && (time.start || time.end);
+    console.log("time", time);
     // console.log("value", value);
     return value;
   };
@@ -40,16 +40,23 @@ const Tracker = ({ type, bgColor }) => {
     return total;
   };
 
-  const status = () => {
-    switch (type) {
-      case "feed":
-        return <h2>Expressed {feedAmount} oz</h2>;
-      case "sleep":
-        return <h2>Slept</h2>;
-      default:
-        return "";
-    }
-  };
+  // const getDuration = () => {
+  //   console.log("IN getSleepDuration");
+  //   // let duration = moment(timeStart).from(currentTime);
+  //   // return duration;
+  // };
+
+  // const status = () => {
+  //   switch (type) {
+  //     case "feed":
+  //       return <h2>Expressed {feedAmount} oz</h2>;
+  //     case "sleep":
+  //       return <h2>Slept {getDuration()}</h2>;
+  //     default:
+  //       return "";
+  //   }
+  // };
+
   return (
     <div
       className={type}
@@ -72,10 +79,12 @@ const Tracker = ({ type, bgColor }) => {
         }
       `}
     >
-      {/* <h1>START: {moment(feedTimeStart).format("h:mm:ss a")}</h1> */}
-      {/* <h1>CURRENT: {moment(currentTime).format("h:mm:ss a")}</h1> */}
-      <RelativeTime type={type} timeStart={getTimeType()} />
-      {status()}
+      <RelativeTime
+        type={type}
+        timeStart={getTimeType()}
+        feedAmount={feedAmount}
+      />
+      {/* <h2>{status()}</h2> */}
       <p>Total {getTotalFeed()} oz</p>
     </div>
   );
