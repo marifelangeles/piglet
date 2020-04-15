@@ -5,7 +5,7 @@ import {
 } from "../constants";
 
 const initalState = {
-  isAsleep: false,
+  isAsleep: null,
   sleep: [],
 };
 

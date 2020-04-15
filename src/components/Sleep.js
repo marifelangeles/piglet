@@ -17,6 +17,7 @@ const Sleep = () => {
   const isAsleep = useSelector((state) => state.sleepReducer.isAsleep);
 
   const handleSubmit = () => {
+    console.log("submit hit ---> isAslee? ", isAsleep);
     dispatch(updateSleepStatus(isAsleep));
     if (!isAsleep) {
       console.log("fell asleep hit");
