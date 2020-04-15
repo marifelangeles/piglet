@@ -4,15 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 
 import moment from "moment";
 
-const RelativeTime = ({ type, timeStart, feedAmount }) => {
+const RelativeTime = ({
+  type,
+  feedTimeStart,
+  feedAmount,
+  lastSleepEnd,
+  lastSleepStart,
+  lastSleepTime,
+}) => {
   const dispatch = useDispatch();
   const [currentTime, setCurrentTime] = useState(new Date());
   const sleep = useSelector((state) => state.sleepReducer);
-
-  if (type === "sleep") {
-    console.log("timeStart", timeStart);
-    console.log("currentTime", currentTime);
-  }
+  const isAsleep = sleep.isAsleep;
 
   useEffect(() => {
     let timerID = setInterval(() => tick(), 1000);
@@ -24,18 +27,23 @@ const RelativeTime = ({ type, timeStart, feedAmount }) => {
   };
 
   const getRelativeTime = () => {
-    let relativeTime = moment(timeStart).from(currentTime);
-    return relativeTime;
+    if (type === "feed") {
+      return feedTimeStart && moment(feedTimeStart).from(currentTime);
+    }
+    if (type === "sleep") {
+      return lastSleepTime && moment(lastSleepTime).from(currentTime);
+    }
   };
 
   const sleepingTime = () => {
-    let time = moment(timeStart).from(currentTime, true);
+    let time = moment(lastSleepStart).from(currentTime, true);
     return time;
   };
 
-  let start = moment(timeStart);
-  let end = moment(currentTime);
-  let duration = end.diff(start, false);
+  const sleepDuration = () => {
+    let duration = moment(lastSleepStart).from(lastSleepEnd, true);
+    return duration;
+  };
 
   const status = () => {
     switch (type) {
@@ -47,7 +55,7 @@ const RelativeTime = ({ type, timeStart, feedAmount }) => {
         if (isAsleep) {
           return <h2>Sleeping {sleepingTime()}</h2>;
         } else {
-          return <h2>Slept </h2>;
+          return <h2>Slept {sleepDuration()}</h2>;
         }
       default:
         return "";
@@ -56,8 +64,17 @@ const RelativeTime = ({ type, timeStart, feedAmount }) => {
 
   return (
     <div>
-      <h1>{timeStart && getRelativeTime()}</h1>
-      <h2>{status()}</h2>
+      {/* {type === "sleep" ? (
+        isAsleep ? (
+          <h1>Fell asleep {getRelativeTime()}</h1>
+        ) : (
+          <h1>Woke up {getRelativeTime()}</h1>
+        )
+      ) : (
+        <h1>{getRelativeTime()}</h1>
+      )} */}
+      <h1>{getRelativeTime()}</h1>
+      {status()}
     </div>
   );
 };

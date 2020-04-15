@@ -5,6 +5,7 @@ import { navigate } from "@reach/router";
 /** @jsx jsx */
 import { css, jsx } from "@emotion/core";
 import moment from "moment";
+import _ from "lodash";
 
 import RelativeTime from "./RelativeTime";
 
@@ -24,12 +25,31 @@ const Tracker = ({ type, bgColor }) => {
     return value;
   };
 
+  const getLastSleepStart = () => {
+    let lastSleepStart = _.findLast(sleepTimes, (time) => {
+      return time.start;
+    });
+    let value = lastSleepStart && lastSleepStart["start"];
+    console.log("TIME START", lastSleepStart);
+    console.log("value", value);
+    return value;
+  };
+  const getLastSleepEnd = () => {
+    let lastSleepEnd = _.findLast(sleepTimes, (time) => {
+      return time.end;
+    });
+    let value = lastSleepEnd && lastSleepEnd["end"];
+    console.log("TIME END", lastSleepEnd);
+    console.log("value", value);
+    return value;
+  };
+
   const getTimeType = () => {
     switch (type) {
       case "feed":
         return feedTimeStart;
-      case "sleep":
-        return getLastSleepTime();
+      // case "sleep":
+      //   return getLastSleepTime();
       default:
         return null;
     }
@@ -39,23 +59,6 @@ const Tracker = ({ type, bgColor }) => {
     let total = totalFeed.reduce((total, num) => total + num, 0);
     return total;
   };
-
-  // const getDuration = () => {
-  //   console.log("IN getSleepDuration");
-  //   // let duration = moment(timeStart).from(currentTime);
-  //   // return duration;
-  // };
-
-  // const status = () => {
-  //   switch (type) {
-  //     case "feed":
-  //       return <h2>Expressed {feedAmount} oz</h2>;
-  //     case "sleep":
-  //       return <h2>Slept {getDuration()}</h2>;
-  //     default:
-  //       return "";
-  //   }
-  // };
 
   return (
     <div
@@ -81,10 +84,12 @@ const Tracker = ({ type, bgColor }) => {
     >
       <RelativeTime
         type={type}
-        timeStart={getTimeType()}
+        feedTimeStart={feedTimeStart}
         feedAmount={feedAmount}
+        lastSleepEnd={getLastSleepEnd()}
+        lastSleepStart={getLastSleepStart()}
+        lastSleepTime={getLastSleepTime()}
       />
-      {/* <h2>{status()}</h2> */}
       <p>Total {getTotalFeed()} oz</p>
     </div>
   );
