@@ -2,11 +2,13 @@ import {
   UPDATE_SLEEP_STATUS,
   ADD_SLEEP_START,
   ADD_SLEEP_END,
+  ADD_SLEEP_DURATION,
 } from "../constants";
 
 const initalState = {
   isAsleep: null,
   sleep: [],
+  duration: [],
 };
 
 const sleep = (state = initalState, action) => {
@@ -22,6 +24,10 @@ const sleep = (state = initalState, action) => {
   if (action.type === ADD_SLEEP_END) {
     console.log("adding sleep end");
     return { ...state, sleep: [...state.sleep, action.payload] };
+  }
+  if (action.type === ADD_SLEEP_DURATION) {
+    console.log("adding sleep duration");
+    return { ...state, duration: [...state.duration, action.payload] };
   }
   return state;
 };

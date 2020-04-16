@@ -20,7 +20,7 @@ const Tracker = ({ type, bgColor }) => {
     let lastSleepTime = sleepTimes.slice(-1);
     let time = lastSleepTime && lastSleepTime[0];
     let value = time && (time.start || time.end);
-    console.log("last recorded time", time);
+    // console.log("last recorded time", time);
     // console.log("value", value);
     return value;
   };
@@ -30,15 +30,16 @@ const Tracker = ({ type, bgColor }) => {
       return time.start;
     });
     let value = lastSleepStart && lastSleepStart["start"];
-    console.log("TIME START", lastSleepStart);
+    // console.log("TIME START", lastSleepStart);
     return value;
   };
+
   const getLastSleepEnd = () => {
     let lastSleepEnd = _.findLast(sleepTimes, (time) => {
       return time.end;
     });
     let value = lastSleepEnd && lastSleepEnd["end"];
-    console.log("TIME END", lastSleepEnd);
+    // console.log("TIME END", lastSleepEnd);
     return value;
   };
 

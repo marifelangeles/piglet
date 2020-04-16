@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { navigate } from "@reach/router";
 
+import _ from "lodash";
 import moment from "moment";
 
 import {
@@ -12,6 +13,8 @@ import {
 
 const Sleep = () => {
   const dispatch = useDispatch();
+
+  const sleepTimes = useSelector((state) => state.sleepReducer.sleep); // [ { start: ''}, { end: ''}]
 
   const [time] = useState(new Date());
   const isAsleep = useSelector((state) => state.sleepReducer.isAsleep);

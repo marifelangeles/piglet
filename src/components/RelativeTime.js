@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import momentDurationFormatSetup from "moment-duration-format";
 
+import currentTime from "./CurrentTime";
+
 const RelativeTime = ({
   type,
   feedTimeStart,
@@ -13,31 +15,20 @@ const RelativeTime = ({
   lastSleepStart,
   lastSleepTime,
 }) => {
-  const dispatch = useDispatch();
-  const [currentTime, setCurrentTime] = useState(new Date());
   const sleep = useSelector((state) => state.sleepReducer);
   const isAsleep = sleep.isAsleep;
 
-  useEffect(() => {
-    let timerID = setInterval(() => tick(), 1000);
-    return () => clearInterval(timerID);
-  });
-
-  const tick = () => {
-    setCurrentTime(new Date());
-  };
-
   const relativeTime = () => {
     if (type === "feed") {
-      return feedTimeStart && moment(feedTimeStart).from(currentTime);
+      return feedTimeStart && moment(feedTimeStart).from(currentTime());
     }
     if (type === "sleep") {
-      return lastSleepTime && moment(lastSleepTime).from(currentTime);
+      return lastSleepTime && moment(lastSleepTime).from(currentTime());
     }
   };
 
   const sleepingTime = () => {
-    let time = moment(lastSleepStart).from(currentTime, true);
+    let time = moment(lastSleepStart).from(currentTime(), true);
     return time;
   };
 
@@ -47,6 +38,7 @@ const RelativeTime = ({
   };
 
   const duration = () => {
+    console.log("IN DURATION RELATIVE TIME");
     let t1 = new Date(lastSleepStart);
     let t2 = new Date(lastSleepEnd);
     console.log("t1 ", t1);
