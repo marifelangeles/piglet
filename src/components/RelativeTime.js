@@ -1,9 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
+import currentTime from "components/utils/CurrentTime";
+
 import moment from "moment";
 
-import currentTime from "./CurrentTime";
+
 
 const RelativeTime = ({ activity }) => {
   const sleepTimes = useSelector((state) => state.sleepReducer.sleep); // [ { start: ''}, { end: ''}]

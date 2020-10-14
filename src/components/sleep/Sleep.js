@@ -9,7 +9,7 @@ import {
   updateSleepStatus,
   addSleepStart,
   addSleepEnd,
-} from "../actions/update-sleep";
+} from "data/sleep/update-sleep";
 
 const Sleep = () => {
   const dispatch = useDispatch();

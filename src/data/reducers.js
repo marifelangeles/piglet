@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 
-import feedReducer from "./feed-reducer";
-import sleepReducer from "./sleep-reducer";
+import feedReducer from "data/feed/feed-reducer";
+import sleepReducer from "data/sleep/sleep-reducer";
 
 export default combineReducers({
   feedReducer,

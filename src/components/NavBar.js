@@ -3,7 +3,7 @@
 
 import { Link } from "@reach/router";
 import { css, jsx } from "@emotion/core";
-import colors from "./colors";
+import colors from "components/utils/colors";
 
 const NavBar = () => (
   <header
