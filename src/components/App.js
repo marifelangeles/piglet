@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Router } from "@reach/router";
-import Home from "./Home";
-import Feed from "./Feed";
-import Sleep from "./Sleep";
-import Food from "./Food";
-import Cry from "./Cry";
-import NavBar from "./NavBar";
+import Home from "components/Home";
+import Feed from "components/feed/Feed";
+import Sleep from "components/sleep/Sleep";
+import Food from "components/food/Food";
+import Cry from "components/cry/Cry";
+import NavBar from "components/NavBar";
 
 class App extends Component {
   render() {

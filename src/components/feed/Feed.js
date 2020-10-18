@@ -8,7 +8,7 @@ import {
   updateFeedTimeStart,
   updateFeedAmount,
   addFeed,
-} from "../actions/update-feed";
+} from "data/feed/update-feed";
 
 const Feed = () => {
   const dispatch = useDispatch();

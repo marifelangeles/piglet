@@ -1,7 +1,7 @@
 import { applyMiddleware, compose, createStore } from "redux";
 
-import reducers from "../reducers";
-import initialState from "./initial-state";
+import reducers from "data/reducers";
+import initialState from "data/initial-state";
 
 const middleware = [];
 const enhancers = [];

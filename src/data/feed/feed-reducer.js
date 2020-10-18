@@ -3,8 +3,8 @@ import {
   UPDATE_FEED_TIME_START,
   UPDATE_CURRENT_TIME,
   ADD_FEED,
-} from "../constants";
-import initalState from "../store/initial-state";
+} from "data/actionTypes";
+import initalState from "data/initial-state";
 
 const feed = (state = initalState, action) => {
   if (action.type === UPDATE_FEED_TIME_START) {

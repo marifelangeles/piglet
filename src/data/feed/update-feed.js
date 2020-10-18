@@ -3,7 +3,7 @@ import {
   UPDATE_FEED_AMOUNT,
   UPDATE_CURRENT_TIME,
   ADD_FEED,
-} from "../constants";
+} from "data/actionTypes";
 
 export const updateFeedTimeStart = (feedTimeStart) => ({
   type: UPDATE_FEED_TIME_START,
