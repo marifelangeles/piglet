@@ -20,7 +20,6 @@ const Sleep = () => {
   const isAsleep = useSelector((state) => state.sleepReducer.isAsleep);
 
   const handleSubmit = () => {
-    console.log("submit hit ---> isAslee? ", isAsleep);
     dispatch(updateSleepStatus(isAsleep));
     if (!isAsleep) {
       console.log("fell asleep hit");
@@ -37,7 +36,7 @@ const Sleep = () => {
     <div>
       <h1>{moment(time).format("LT")}</h1>
       <button onClick={handleSubmit}>
-        {isAsleep ? "Woke Up" : "Fell Asleep"}
+        { isAsleep ? "Woke Up" : "Fell Asleep"}
       </button>
     </div>
   );
