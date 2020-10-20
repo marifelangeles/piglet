@@ -6,16 +6,17 @@ import momentDurationFormatSetup from "moment-duration-format";
 import { findLast } from "lodash";
 
 const Total = ({ activity }) => {
-  const sleepTimes = useSelector((state) => state.sleepReducer.sleep); // [ { start: ''}, { end: ''}]
-
-  const totalFeed = useSelector((state) => state.feedReducer.totalFeed);
+  const { sleepTimes, totalFeed } = useSelector(state => {
+    state.sleepReducer.sleep,
+    state.feedReducer.totalFeed
+  }); // [ { start: ''}, { end: ''}]
 
   function getLastSleepStart() {
     const lastSleepStart = findLast(sleepTimes, time => {
       return time.start;
     });
-    const value = lastSleepStart && lastSleepStart["start"];
-    return value;
+
+    return lastSleepStart && lastSleepStart["start"];
   };
 
   function getLastSleepEnd() {

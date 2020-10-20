@@ -36,7 +36,7 @@ const Sleep = () => {
     <div>
       <h1>{moment(time).format("LT")}</h1>
       <button onClick={handleSubmit}>
-        { isAsleep ? "Woke Up" : "Fell Asleep"}
+        { isAsleep ? "Woke Up" : "Fell Asleep" }
       </button>
     </div>
   );

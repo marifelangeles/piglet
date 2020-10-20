@@ -17,8 +17,7 @@ const Status = ({ activity }) => {
       return time.start;
     });
 
-    const value = lastSleepStart && lastSleepStart["start"];
-    return value;
+    return lastSleepStart && lastSleepStart["start"];
   };
 
   const getLastSleepEnd = () => {
@@ -26,12 +25,11 @@ const Status = ({ activity }) => {
       return time.end;
     });
 
-    const value = lastSleepEnd && lastSleepEnd["end"];
-    return value;
+    return lastSleepEnd && lastSleepEnd["end"];
   };
 
   function sleepingTime() {
-    let time = moment( getLastSleepStart()).from(currentTime(), true);
+    let time = moment(getLastSleepStart()).from(currentTime(), true);
     return time;
   };
 
