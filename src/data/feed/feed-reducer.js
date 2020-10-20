@@ -3,7 +3,7 @@ import {
   UPDATE_FEED_TIME_START,
   UPDATE_CURRENT_TIME,
   ADD_FEED,
-} from "data/actionTypes";
+} from "data/feed/feed-actions";
 import initalState from "data/initial-state";
 
 const feed = (state = initalState, action) => {

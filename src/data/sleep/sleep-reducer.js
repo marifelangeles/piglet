@@ -3,7 +3,7 @@ import {
   ADD_SLEEP_START,
   ADD_SLEEP_END,
   ADD_SLEEP_DURATION,
-} from "data/actionTypes";
+} from "data/sleep/sleep-actions";
 
 const initalState = {
   isAsleep: null,

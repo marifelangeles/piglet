@@ -5,9 +5,9 @@ import { navigate } from "@reach/router";
 import { css, jsx } from "@emotion/core";
 import _ from "lodash";
 
-import RelativeTime from "./RelativeTime";
-import Status from "./Status";
-import Total from "./Total";
+import RelativeTime from "components/utils/RelativeTime";
+import Status from "components/utils/Status";
+import Total from "components/utils/Total";
 
 const Tracker = ({ type, bgColor }) => {
   const activity = type;
